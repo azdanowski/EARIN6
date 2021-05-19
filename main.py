@@ -27,7 +27,9 @@ def read_validation_dataset():
     return validation_dataset
 
 def read_validation_labels(validation_dataset):
+    # load dataset
     validation_labels = pd.read_csv('arcene_valid.labels', header=None)
+    # validate file:
     assert validation_labels.shape[0] == validation_dataset.shape[0]
     assert validation_labels.isna().sum().sum() == 0
     return validation_labels
@@ -43,6 +45,9 @@ def split_data_train_test(training_dataset, training_labels):
     # validate dimensions
     assert x_train.shape[0] == y_train.shape[0]
     assert x_test.shape[0] == y_test.shape[0]
+    # validate dimensions between split and dataset
+    assert x_train.shape[0] + x_test.shape[0] == training_dataset.shape[0]
+    assert y_train.shape[0] + y_test.shape[0] == training_labels.shape[0]
     return x_train, x_test, y_train, y_test
 
 
@@ -55,9 +60,8 @@ if __name__ == '__main__':
     validation_dataset = read_validation_dataset()
     validation_labels = read_validation_labels(validation_dataset)
 
-    # validate dimensions match between split and dataset
-    assert x_train.shape[0] + x_test.shape[0] == training_dataset.shape[0]
-    assert y_train.shape[0] + y_test.shape[0] == training_labels.shape[0]
+    
+
 
 
 
