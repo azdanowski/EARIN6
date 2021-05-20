@@ -18,7 +18,7 @@ from sklearn.ensemble import RandomForestClassifier
 from main import *  # xDDD
 from plotting_utils import *
 
-class ReaaaalySmart:
+class ReaaaallySmart:
 
     def __init__(self):
 
@@ -54,5 +54,5 @@ class ReaaaalySmart:
 
 if __name__ == '__main__':
 
-    tests = ReaaaalySmart()
+    tests = ReaaaallySmart()
     tests.do_some_testing()
