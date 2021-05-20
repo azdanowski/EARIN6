@@ -56,4 +56,6 @@ def display_metrics_for_validation(
                                    ):
     print(model_name)
     print("Metrics for validation dataset:")
-    display_metrics(model_name + " validation", *calculate_metrics(model, validation_dataset, validation_labels))
+    metrics = calculate_metrics(model, validation_dataset, validation_labels)
+    display_metrics(model_name + " validation", *metrics)
+    return metrics[3]
