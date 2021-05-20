@@ -1,8 +1,4 @@
 import sys
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-
 from file_reader import * #
 from classifiers import *
 from metrics import *
@@ -18,7 +14,7 @@ if __name__ == '__main__':
     validation_labels = read_validation_labels(validation_dataset)
     test_dataset = read_test_dataset()
     # group together training and validation
-    datasets = (training_dataset, training_labels, validation_dataset, validation_labels)
+    datasets = (validation_dataset, validation_labels)
 
     
     # model 1: lsvc
@@ -40,5 +36,13 @@ if __name__ == '__main__':
     lr = get_logistic_regression(training_dataset, training_labels)
     display_metrics_for_validation(lr, name, *datasets)
     predict_test_data(lr, test_dataset)
+    
+    # model 4 gradient boosting:
+    name = 'gradient boosting'
+    gb = get_gradient_boosing_classifier(training_dataset, training_labels)
+    display_metrics_for_validation(gb, name, *datasets)
+    predict_test_data(gb, test_dataset)
+    
+    
     
     sys.exit(0)
