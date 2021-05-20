@@ -49,6 +49,8 @@ def read_validation_labels(validation_dataset):
 
 def read_test_dataset():
     test_dataset = pd.read_csv('arcene_test.data', sep='\s+', header=None)
+    assert test_dataset.sum().sum() == 493023349.0
+    assert test_dataset.isna().sum().sum() == 0
     return test_dataset
 
 def split_data_train_test(training_dataset, training_labels):
@@ -159,10 +161,7 @@ if __name__ == '__main__':
     display_metrics_for_training_and_validation(rfc, name, *datasets)
     predict_test_data(rfc, test_dataset)
 
-   # rfc = get_random_forest_classifier(x_train, y_train)
-    
-   # metrics(rfc, x_test, y_test)
-   # metrics(lsvc, validation_dataset, validation_labels)
+    # model 3: 
 
 
 
