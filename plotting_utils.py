@@ -58,7 +58,7 @@ class PrecisionRecallCurves:
     Also, a method is provided to display the plot of aggregated curves.
     """
 
-    def __init__(self, models, data, labels, model_names):
+    def __init__(self, models, model_names, data, labels):
         """
         models - models to predict with
         data   - data sets for the models (same data for each model)
