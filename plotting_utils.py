@@ -61,23 +61,22 @@ class PrecisionRecallCurves:
     def __init__(self, models, data, labels, model_names):
         """
         models - models to predict with
-        data   - data sets for the models (separate data for each model)
-        labels - labels of the data (separate labels for each model)
+        data   - data sets for the models (same data for each model)
+        labels - labels of the data (same labels for each model)
         model_names - modale names
 
         All the parameters have to be provided in respective order.
         """
 
         # asserts to assure the parameters sizes are equal:
-        assert len(models) == len(data)
+        assert len(models) == len(model_names)
         assert len(data) == len(labels)
-        assert len(labels) == len(model_names)
 
         # assurance completed, now it is safe to initialize:
         self.models = models
+        self.model_names = model_names
         self.data = data
         self.labels = labels
-        self.model_names = model_names
 
         self.recalls = self._init_rp(len(self.models))
         self.precisions = self.init_rp(len(self.models))
@@ -93,8 +92,8 @@ class PrecisionRecallCurves:
         """Method to predict on the data fed to the models."""
 
         for i, model in enumerate(self.models):
-            pred = model.predict(self.data[i])
-            self.recalls[i], self.precisions[i], _ = prc(self.labels[i], pred)
+            pred = model.predict(self.data)
+            self.recalls[i], self.precisions[i], _ = prc(self.labels, pred)
 
     def get_curves(self):
         """Returns recall and precision curves."""
