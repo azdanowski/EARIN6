@@ -9,7 +9,7 @@ from sklearn.metrics import (
                                 plot_roc_curve,
                                 roc_auc_score,
                                 accuracy_score,
-                                plot_confusion_matrix
+                                plot_confusion_matrix,
                             )
 from sklearn.svm import LinearSVC
 import matplotlib.pyplot as plt
@@ -46,6 +46,10 @@ def read_validation_labels(validation_dataset):
     assert validation_labels.shape[0] == validation_dataset.shape[0]
     assert validation_labels.isna().sum().sum() == 0
     return validation_labels
+
+def read_test_dataset():
+    test_dataset = pd.read_csv('arcene_test.data', sep='\s+', header=None)
+    return test_dataset
 
 def split_data_train_test(training_dataset, training_labels):
     # split into train (0.8), test (0.2)
@@ -100,9 +104,9 @@ def get_random_forest_classifier(x_train, y_train):
     rfc = RandomForestClassifier(random_state=0)
     rfc.fit(x_train, y_train.values.ravel())
     return rfc
-    
-def predict_test_data(model):
-    predictions = model.predict(pd.read_csv('arcene_test.data', sep='\s+', header=None))
+   
+def predict_test_data(model, test_dataset):
+    predictions = model.predict(test_dataset)
     negative = 0
     positive = 0
     for i in range(len(predictions)):
@@ -129,13 +133,14 @@ def display_metrics_for_training_and_validation(
     
 
 if __name__ == '__main__':
-
+    
     # preparing dataset
     training_dataset = read_training_data()
     training_labels = read_training_labels(training_dataset)
     x_train, x_test, y_train, y_test = split_data_train_test(training_dataset, training_labels)
     validation_dataset = read_validation_dataset()
     validation_labels = read_validation_labels(validation_dataset)
+    test_dataset = read_test_dataset()
     # group together training and validation
     datasets = (training_dataset, training_labels, validation_dataset, validation_labels)
 
@@ -144,7 +149,7 @@ if __name__ == '__main__':
     name = "linear support vector"
     lsvc = get_linear_support_vector_classifier(x_train, y_train)
     display_metrics_for_training_and_validation(lsvc, name, *datasets)
-    predict_test_data(lsvc)
+    predict_test_data(lsvc, test_dataset)
 
 
 
@@ -152,7 +157,7 @@ if __name__ == '__main__':
     name = "random forest"
     rfc = get_random_forest_classifier(x_train, y_train)
     display_metrics_for_training_and_validation(rfc, name, *datasets)
-    predict_test_data(rfc)
+    predict_test_data(rfc, test_dataset)
 
    # rfc = get_random_forest_classifier(x_train, y_train)
     
