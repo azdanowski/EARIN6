@@ -22,7 +22,7 @@ def get_logistic_regression(x_train, y_train):
     return lr
 
 def get_gradient_boosing_classifier(x_train, y_train):
-    gbc = LogisticRegression()
+    gbc = GradientBoostingClassifier()
     gbc.fit(x_train, y_train.values.ravel())
     return gbc
 
