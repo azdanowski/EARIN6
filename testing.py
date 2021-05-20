@@ -38,17 +38,20 @@ class ReaaaallySmart:
         models = []
 
         lsvc1 = LinearSVC(random_state=0, tol=1e-6, class_weight='balanced')
-        lsvc1.fit(self.training_dataset, self.training_labels.ravel())
+        lsvc1.fit(self.training_dataset.to_numpy(),
+            self.training_labels.to_numpy().ravel())
         models.append(lsvc1)
         model_names.append("lsvc1")
 
         lsvc2 = LinearSVC(random_state=0, tol=1e-6, class_weight='balanced')
-        lsvc2.fit(self.training_dataset, self.training_labels.ravel())
+        lsvc2.fit(self.training_dataset.to_numpy(),
+            self.training_labels.to_numpy().ravel())
         models.append(lsvc2)
         model_names.append("lsvc2")
 
-        prc = PrecisionRecallCurves(models, model_names, self.training_dataset,
-            self.training_labels)
+        prc = PrecisionRecallCurves(models, model_names,
+            self.validation_dataset.to_numpy(),
+            self.validation_labels.to_numpy().ravel())
         prc.plot()
 
 

@@ -16,9 +16,13 @@ class PrecisionRecallComparisonDisplay:
         self.precisions = precisions
         self.recalls = recalls
         self.model_names = model_names
+        print(precisions)
+        print(recalls)
+
+        self.length = len(self.precisions)
 
         self.fig = plt.figure()
-        self.axes = [] * self.length
+        self.axes = []
 
         self._add_axes()
         self._plot_on_axes()
@@ -32,7 +36,7 @@ class PrecisionRecallComparisonDisplay:
         """
 
         for i in range(self.length):
-            self.axes.append(self.fig.add_axes([0.1, 0.3, 0.8, 0.8]))
+            self.axes.append(self.fig.add_axes([0.0, 0.0, 1.0, 1.0]))
 
     def _plot_on_axes(self):
         """Helper method for the initialization
@@ -79,14 +83,14 @@ class PrecisionRecallCurves:
         self.labels = labels
 
         self.recalls = self._init_rp(len(self.models))
-        self.precisions = self.init_rp(len(self.models))
+        self.precisions = self._init_rp(len(self.models))
 
     def _init_rp(self, length):
         """Helper method to initialize self.recalls and self.precisions
         in a static manner, based on the length of __init__ parameters.
         """
 
-        return [] * length
+        return [None] * length
 
     def _predict(self):
         """Method to predict on the data fed to the models."""
@@ -111,5 +115,5 @@ class PrecisionRecallCurves:
             self.precisions, self.recalls, self.model_names)
         plt.xlabel('Recall')
         plt.ylabel('Precision')
-        plt.legend()
+        # plt.legend()
         figures.plot()
