@@ -14,44 +14,8 @@ from sklearn.metrics import (
 from sklearn.svm import LinearSVC
 import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestClassifier
+from file_reader import * #
 
-def read_training_data():
-    # read training file:
-    dataset = pd.read_csv('arcene_train.data', sep='\s+', header=None)
-    # validate file: 
-    assert dataset.sum().sum() == 70726744.0    # checksum 
-    assert dataset.isna().sum().sum() == 0      # no NaN values
-    return dataset
-
-def read_training_labels(training_dataset):
-# load training labels:
-    dataset_labels = pd.read_csv('arcene_train.labels', header=None)
-    # validate file:
-    assert dataset_labels.shape[0] == training_dataset.shape[0]  # matrix dimensions match
-    assert dataset_labels.isna().sum().sum() == 0       # no NaN values
-    return dataset_labels
-
-def read_validation_dataset():
-    # load dataset
-    validation_dataset = pd.read_csv('arcene_valid.data', sep='\s+', header=None)
-    # validate file:
-    assert validation_dataset.sum().sum() == 71410108.0     # checksum OK
-    assert validation_dataset.isna().sum().sum() == 0       # no Nan values
-    return validation_dataset
-
-def read_validation_labels(validation_dataset):
-    # load dataset
-    validation_labels = pd.read_csv('arcene_valid.labels', header=None)
-    # validate file:
-    assert validation_labels.shape[0] == validation_dataset.shape[0]
-    assert validation_labels.isna().sum().sum() == 0
-    return validation_labels
-
-def read_test_dataset():
-    test_dataset = pd.read_csv('arcene_test.data', sep='\s+', header=None)
-    assert test_dataset.sum().sum() == 493023349.0
-    assert test_dataset.isna().sum().sum() == 0
-    return test_dataset
 
 def split_data_train_test(training_dataset, training_labels):
     # split into train (0.8), test (0.2)
@@ -139,7 +103,6 @@ if __name__ == '__main__':
     # preparing dataset
     training_dataset = read_training_data()
     training_labels = read_training_labels(training_dataset)
-    x_train, x_test, y_train, y_test = split_data_train_test(training_dataset, training_labels)
     validation_dataset = read_validation_dataset()
     validation_labels = read_validation_labels(validation_dataset)
     test_dataset = read_test_dataset()
@@ -149,7 +112,7 @@ if __name__ == '__main__':
     
     # model 1: lsvc
     name = "linear support vector"
-    lsvc = get_linear_support_vector_classifier(x_train, y_train)
+    lsvc = get_linear_support_vector_classifier(training_dataset, training_labels)
     display_metrics_for_training_and_validation(lsvc, name, *datasets)
     predict_test_data(lsvc, test_dataset)
 
@@ -157,7 +120,7 @@ if __name__ == '__main__':
 
     # model 2: random forest
     name = "random forest"
-    rfc = get_random_forest_classifier(x_train, y_train)
+    rfc = get_random_forest_classifier(training_dataset, training_labels)
     display_metrics_for_training_and_validation(rfc, name, *datasets)
     predict_test_data(rfc, test_dataset)
 
