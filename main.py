@@ -24,7 +24,7 @@ if __name__ == '__main__':
     # model 1: lsvc
     name = "linear support vector"
     lsvc = get_linear_support_vector_classifier(training_dataset, training_labels)
-    display_metrics_for_training_and_validation(lsvc, name, *datasets)
+    display_metrics_for_validation(lsvc, name, *datasets)
     predict_test_data(lsvc, test_dataset)
 
 
@@ -32,11 +32,13 @@ if __name__ == '__main__':
     # model 2: random forest
     name = "random forest"
     rfc = get_random_forest_classifier(training_dataset, training_labels)
-    display_metrics_for_training_and_validation(rfc, name, *datasets)
+    display_metrics_for_validation(rfc, name, *datasets)
     predict_test_data(rfc, test_dataset)
 
-    # model 3: 
-
-
-
+    # model 3 logistic regression: 
+    name = 'logistic regression'
+    lr = get_logistic_regression(training_dataset, training_labels)
+    display_metrics_for_validation(lr, name, *datasets)
+    predict_test_data(lr, test_dataset)
+    
     sys.exit(0)
