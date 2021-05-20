@@ -51,8 +51,6 @@ def predict_test_data(model, test_dataset):
 def display_metrics_for_validation(
                                     model,
                                     model_name,
-                                    training_dataset,
-                                    training_labels,
                                     validation_dataset,
                                     validation_labels
                                    ):

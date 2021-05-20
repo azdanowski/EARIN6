@@ -1,6 +1,6 @@
 
 from sklearn.svm import LinearSVC
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.linear_model import LogisticRegression
 
 def get_linear_support_vector_classifier(x_train, y_train):
@@ -16,6 +16,11 @@ def get_random_forest_classifier(x_train, y_train):
     return rfc
 
 def get_logistic_regression(x_train, y_train):
-    lr = LogisticRegression(random_state=0, solver='liblinear')
+    lr = LogisticRegression(random_state=0,)
     lr.fit(x_train, y_train.values.ravel())
     return lr
+
+def get_gradient_boosing_classifier(x_train, y_train):
+    gb = LogisticRegression(random_state=0)
+    gb.fit(x_train, y_train.values.ravel())
+    return gb
