@@ -80,7 +80,7 @@ def get_loss_function(name, x_test, y_test):
             loss = hinge_loss(y_test.values.ravel(), pred_decision)
         else:
             loss = log_loss(y_test.values.ravel(), pred_decision)
-        print("Loss function:" + loss)
+        print("Loss function:" + str(loss))
         return loss
     else:
         print("loss: MODEL NOT FOUND " + name)
