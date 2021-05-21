@@ -36,7 +36,7 @@ if __name__ == '__main__':
     
     test_dataset = read_test_dataset()
     
-    t = 0.8 # train to test proportion,
+    t = 0.9 # train to test proportion,
             # example: 0.8 for 80-20 training-test split
     x_train, x_test, y_train, y_test = train_test_split_assert(*training, t)
    
@@ -52,22 +52,25 @@ if __name__ == '__main__':
                     'gradient boosting',
                     'k neighbors'
                   ]
+    
+    model_names = [model_names[0]] #test 1 model
 
     for name in model_names:
         model = get_trained_model(name, x_train, y_train)
         message = "train-test-split"
         metrics_comparison[name] = calculate_and_display_metrics(
             model, message, name, x_test, y_test)
+      #  predict_test_data(model, test_dataset)
+        get_loss_function(name, x_test, y_test)
+
+
+
+    for name in model_names:
+        model = get_trained_model(name, training_dataset, training_labels)
+        message = 'validation'
+        metrics_comparison[name] = calculate_and_display_metrics(
+            model, message, name, *validation)
         predict_test_data(model, test_dataset)
-
-
-
-    # for name in model_names:
-    #     model = get_trained_model(name, training_dataset, training_labels)
-    #     message = 'validation'
-    #     metrics_comparison[name] = calculate_and_display_metrics(
-    #         model, message, name, *validation)
-    #     predict_test_data(model, test_dataset)
 
 
 
@@ -110,6 +113,7 @@ if __name__ == '__main__':
     print("the most accurate model:")
     print(max_val(metrics_comparison))
     # store accuracy in file
+    print(str(metrics_comparison))
     with open('results/metrics_table.json', 'w') as file:
         json.dump(metrics_comparison, file)
 
