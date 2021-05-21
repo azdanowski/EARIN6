@@ -30,36 +30,35 @@ if __name__ == '__main__':
 
     # model 1: lsvc
     name = "linear support vector"
-    lsvc = get_linear_support_vector_classifier(
-        training_dataset, training_labels)
+    lsvc = get_trained_model(name, training_dataset, training_labels)
     metrics_comparison[name] = display_metrics_for_validation(
         lsvc, name, *datasets)
     predict_test_data(lsvc, test_dataset)
 
     # model 2: random forest
     name = "random forest"
-    rfc = get_random_forest_classifier(training_dataset, training_labels)
+    rfc = get_trained_model(name, training_dataset, training_labels)
     metrics_comparison[name] = display_metrics_for_validation(
         rfc, name, *datasets)
     predict_test_data(rfc, test_dataset)
 
     # model 3 logistic regression:
     name = 'logistic regression'
-    lr = get_logistic_regression(training_dataset, training_labels)
+    lr = get_trained_model(name, training_dataset, training_labels)
     metrics_comparison[name] = display_metrics_for_validation(
         lr, name, *datasets)
     predict_test_data(lr, test_dataset)
 
     # model 4 gradient boosting:
     name = 'gradient boosting'
-    gb = get_gradient_boosing_classifier(training_dataset, training_labels)
+    gb = get_trained_model(name, training_dataset, training_labels)
     metrics_comparison[name] = display_metrics_for_validation(
         gb, name, *datasets)
     predict_test_data(gb, test_dataset)
 
     # model 5 k neighbors:
     name = 'k neigbors'
-    kn = get_k_neighbors_classifier(training_dataset, training_labels)
+    kn = get_trained_model(name, training_dataset, training_labels)
     metrics_comparison[name] = display_metrics_for_validation(
         kn, name, *datasets)
     predict_test_data(kn, test_dataset)
