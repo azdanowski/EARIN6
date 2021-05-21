@@ -4,6 +4,11 @@ from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import hinge_loss, log_loss
+import pandas as pd
+from sklearn.experimental import enable_halving_search_cv
+from sklearn.model_selection import HalvingGridSearchCV
+
+from sklearn.datasets import make_classification
 
 models = {}
 models['linear support vector'] = LinearSVC()
@@ -12,12 +17,49 @@ models['logistic regression'] = LogisticRegression(max_iter=1000, solver='liblin
 models['gradient boosting'] = GradientBoostingClassifier()
 models['k neighbors'] = KNeighborsClassifier()
 
+#random forest
+def optimize_random_forest(X, y):
+    param_grid = {'max_depth': [3, 5, 10, 20, 40],
+                'min_samples_split': [2, 5, 10, 20]}
+    base_estimator = RandomForestClassifier(random_state=0)
+    #X, y = make_classification(n_samples=1000, random_state=0)
+    sh = HalvingGridSearchCV(base_estimator, param_grid, cv=5, factor=2,
+                            resource='n_estimators', max_resources=30).fit(X,y)
+    print(sh.best_estimator_)
+    return sh.best_estimator_
+
+def optimize_logistic_regression(X,y):
+    param_grid = {'C': [0.1, 1, 10, 100, 1000],
+                  'solvers' : ['newton-cg', 'lbfgs', 'liblinear'],
+                  'penalty': ['l1', 'l2'], 
+                  'max_iter': [100, 200, 500, 1000]}
+    base_estimator = LogisticRegression()
+    sh = HalvingGridSearchCV(base_estimator, param_grid, cv=5, factor=2
+                        , max_resources=30).fit(X,y)
+    print(sh.best_estimator_)
+    return sh.best_estimator_
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def get_trained_model(name, x_train, y_train):
     if name in models:
         models[name].fit(x_train, y_train.values.ravel())
         return models[name]
     else:
-        print("MODEL NOT FOUND")
+        print("train: MODEL NOT FOUND")
         print(name)
         return None
     
@@ -31,6 +73,5 @@ def get_loss_function(name, x_test, y_test):
         print(loss)
         return loss
     else:
-        print("MODEL NOT FOUND")
-        print(name)
+        print("loss: MODEL NOT FOUND " + name)
         return None

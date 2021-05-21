@@ -1,1 +1,1 @@
-{"metrics": ["f1", "recall", "roc_auc", "accuracy"], "logistic regression": [0.8095238095238095, 0.7727272727272727, [0.8327922077922079], 0.84]}
+{"metrics": ["f1", "recall", "roc_auc", "accuracy"], "random forest": [0.7209302325581395, 0.7045454545454546, [0.7540584415584416], 0.76]}

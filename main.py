@@ -53,7 +53,7 @@ if __name__ == '__main__':
                     'k neighbors'
                   ]
     
-    model_names = [model_names[2]] #test 1 model
+    model_names = [model_names[1]] #test 1 model
 
     for name in model_names:
         model = get_trained_model(name, x_train, y_train)
@@ -73,41 +73,6 @@ if __name__ == '__main__':
         predict_test_data(model, test_dataset)
 
 
-
-    # # model 1: lsvc
-    # name = "linear support vector"
-    # lsvc = get_trained_model(name, training_dataset, training_labels)
-    # metrics_comparison[name] = display_metrics_for_validation(
-    #     lsvc, name, *validation)
-    # predict_test_data(lsvc, test_dataset)
-
-    # # model 2: random forest
-    # name = "random forest"
-    # rfc = get_trained_model(name, training_dataset, training_labels)
-    # metrics_comparison[name] = display_metrics_for_validation(
-    #     rfc, name, *validation)
-    # predict_test_data(rfc, test_dataset)
-
-    # # model 3 logistic regression:
-    # name = 'logistic regression'
-    # lr = get_trained_model(name, training_dataset, training_labels)
-    # metrics_comparison[name] = display_metrics_for_validation(
-    #     lr, name, *validation)
-    # predict_test_data(lr, test_dataset)
-
-    # # model 4 gradient boosting:
-    # name = 'gradient boosting'
-    # gb = get_trained_model(name, training_dataset, training_labels)
-    # metrics_comparison[name] = display_metrics_for_validation(
-    #     gb, name, *validation)
-    # predict_test_data(gb, test_dataset)
-
-    # # model 5 k neighbors:
-    # name = 'k neigbors'
-    # kn = get_trained_model(name, training_dataset, training_labels)
-    # metrics_comparison[name] = display_metrics_for_validation(
-    #     kn, name, *validation)
-    # predict_test_data(kn, test_dataset)
 
     # compare accuracy of all models:
     print("the most accurate model:")
