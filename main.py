@@ -46,7 +46,7 @@ if __name__ == '__main__':
 
 
     model_names = [
-                    'linear support vector',
+                    'support vector',
                     'random forest',
                     'logistic regression',
                     'gradient boosting',
@@ -55,12 +55,15 @@ if __name__ == '__main__':
     
     model_names = [model_names[1]] #test 1 model
 
+   #optimize_svc(x_train, y_train)
+   #sys.exit(0)
+
     for name in model_names:
         model = get_trained_model(name, x_train, y_train)
         message = "train-test-split"
         metrics_comparison[name] = calculate_and_display_metrics(
             model, message, name, x_test, y_test)
-      #  predict_test_data(model, test_dataset)
+        predict_test_data(model, test_dataset)
         get_loss_function(name, x_test, y_test)
 
 

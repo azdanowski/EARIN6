@@ -1,1 +1,1 @@
-{"metrics": ["f1", "recall", "roc_auc", "accuracy"], "random forest": [0.7209302325581395, 0.7045454545454546, [0.7540584415584416], 0.76]}
+{"metrics": ["f1", "recall", "roc_auc", "accuracy"], "support vector": [0.7951807228915662, 0.75, [0.8214285714285714], 0.83]}
