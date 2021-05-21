@@ -1,1 +1,1 @@
-{"metrics": ["f1", "recall", "roc_auc", "accuracy"], "linear support vector": [0.7951807228915662, 0.75, [0.8214285714285714], 0.83]}
+{"metrics": ["f1", "recall", "roc_auc", "accuracy"], "logistic regression": [0.8095238095238095, 0.7727272727272727, [0.8327922077922079], 0.84]}

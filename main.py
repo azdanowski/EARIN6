@@ -53,7 +53,7 @@ if __name__ == '__main__':
                     'k neighbors'
                   ]
     
-    model_names = [model_names[0]] #test 1 model
+    model_names = [model_names[2]] #test 1 model
 
     for name in model_names:
         model = get_trained_model(name, x_train, y_train)

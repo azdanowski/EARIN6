@@ -3,7 +3,7 @@ from sklearn.svm import LinearSVC
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import hinge_loss
+from sklearn.metrics import hinge_loss, log_loss
 
 models = {}
 models['linear support vector'] = LinearSVC()
@@ -24,7 +24,10 @@ def get_trained_model(name, x_train, y_train):
 def get_loss_function(name, x_test, y_test):
     if name in ['linear support vector', 'logistic regression' ]:
         pred_decision = models[name].decision_function(x_test)
-        loss = hinge_loss(y_test.values.ravel(), pred_decision)
+        if name == 'linear support vector':
+            loss = hinge_loss(y_test.values.ravel(), pred_decision)
+        else:
+            loss = log_loss(y_test.values.ravel(), pred_decision)
         print(loss)
         return loss
     else:
