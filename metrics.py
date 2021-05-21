@@ -59,14 +59,15 @@ def predict_test_data(model, test_dataset):
     print(f"    negative: {negative}" + " expected: 390")
 
 
-def display_metrics_for_validation(
+def calculate_and_display_metrics(
     model,
     model_name,
-    validation_dataset,
-    validation_labels
+    message,
+    dataset,
+    labels
 ):
     print(model_name)
-    print("Metrics for validation dataset:")
-    metrics = calculate_metrics(model, validation_dataset, validation_labels)
-    display_metrics(model_name + " validation", *metrics)
+    print(message)
+    metrics = calculate_metrics(model, dataset, labels)
+    display_metrics(model_name + message, *metrics)
     return metrics[0:4]
