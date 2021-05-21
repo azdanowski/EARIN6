@@ -44,7 +44,7 @@ def calculate_metrics(model, data, labels):
     plot_r_c = plot_roc_curve(model, data, labels)
     return f1, recall, roc_auc, accuracy, plot_c_m, plot_r_c
 
-   
+
 def predict_test_data(model, test_dataset):
     predictions = model.predict(test_dataset)
     negative = 0
@@ -68,4 +68,4 @@ def display_metrics_for_validation(
     print("Metrics for validation dataset:")
     metrics = calculate_metrics(model, validation_dataset, validation_labels)
     display_metrics(model_name + " validation", *metrics)
-    return metrics[3]
+    return metrics
