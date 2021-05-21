@@ -52,8 +52,7 @@ if __name__ == '__main__':
                     'gradient boosting',
                     'k neighbors'
                   ]
-    
-    model_names = [model_names[1]] #test 1 model
+
 
    #optimize_svc(x_train, y_train)
    #sys.exit(0)
