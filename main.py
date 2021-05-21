@@ -1,4 +1,5 @@
 import sys
+import json
 from file_reader import *
 from classifiers import *
 from metrics import *
@@ -7,9 +8,9 @@ from metrics import *
 def max_val(d):
     """ a) create a list of the dict's keys and values;
         b) return the key with the max value"""
-    v = list(d.values())
+    v = list(d.values())[1:]
     acc = [val[3] for val in v]
-    k = list(d.keys())
+    k = list(d.keys())[1:]
     max_v = max(acc)
     return k[acc.index(max_v)], max_v
 
@@ -26,6 +27,7 @@ if __name__ == '__main__':
     datasets = (validation_dataset, validation_labels)
 
     metrics_comparison = {}
+    metrics_comparison["metrics"] = ["f1", "recall", "roc_auc", "accuracy"]
 
     # model 1: lsvc
     name = "linear support vector"
@@ -65,4 +67,8 @@ if __name__ == '__main__':
 
     print("the most accurate model:")
     print(max_val(metrics_comparison))
+
+    with open('metrics_table.json', 'w') as file:
+        json.dump(metrics_comparison, file)
+
     sys.exit(0)
