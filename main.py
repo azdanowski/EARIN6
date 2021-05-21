@@ -6,8 +6,7 @@ from metrics import *
 
 
 def max_val(d):
-    """ a) create a list of the dict's keys and values;
-        b) return the key with the max value"""
+    """return max value and its key of dict"""
     v = list(d.values())[1:]
     acc = [val[3] for val in v]
     k = list(d.keys())[1:]
@@ -65,10 +64,11 @@ if __name__ == '__main__':
         kn, name, *datasets)
     predict_test_data(kn, test_dataset)
 
+    # compare accuracy of all models:
     print("the most accurate model:")
     print(max_val(metrics_comparison))
-
-    with open('metrics_table.json', 'w') as file:
+    # store accuracy in file
+    with open('results/metrics_table.json', 'w') as file:
         json.dump(metrics_comparison, file)
 
     sys.exit(0)

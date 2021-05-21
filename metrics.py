@@ -10,7 +10,8 @@ from sklearn.metrics import (
 import matplotlib.pyplot as plt
 import numpy as np
 
-def display_metrics(model_name, f1, recall, roc_auc, accuracy, plot_c_m, plot_r_c):
+def display_metrics(model_name, f1, recall, roc_auc,
+                    accuracy, plot_c_m, plot_r_c):
 
     # display metrics
     print(model_name)
@@ -23,13 +24,13 @@ def display_metrics(model_name, f1, recall, roc_auc, accuracy, plot_c_m, plot_r_
     plot_c_m.ax_.set_title(model_name + " confusion matrix")
     plot_c_m.ax_.figure = fig_c_m
     fig_c_m.add_axes(plot_c_m.ax_)
-    plt.savefig(plot_c_m.ax_.get_title() + ".png")
+    plt.savefig("results/" + plot_c_m.ax_.get_title() + ".png")
 
     fig_r_c = plt.figure()
     plot_r_c.ax_.set_title(model_name + " roc curve")
     plot_r_c.ax_.figure = fig_r_c
     fig_r_c.add_axes(plot_r_c.ax_)
-    plt.savefig(plot_r_c.ax_.get_title() + ".png")
+    plt.savefig("results/" + plot_r_c.ax_.get_title() + ".png")
 
 
 def calculate_metrics(model, data, labels):
